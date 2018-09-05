@@ -3,7 +3,7 @@ version:             0.1.0.0
 github:              "ab9rf/tequila"
 license:             BSD3
 author:              "Kelly Kinkade"
-maintainer:          "kelly.lynn.martin@gmail.com"
+maintainer:          "kmartin@pyrzqxgl.org"
 copyright:           "unspecified"
 
 extra-source-files:
@@ -21,6 +21,7 @@ description:         Please see the README on GitHub at <https://github.com/ab9r
 
 dependencies:
 - base >= 4.7 && < 5
+- sdl2 >= 2.2.0
 
 library:
   source-dirs: src
