@@ -33,7 +33,9 @@ main :: IO ()
 main = do
     args <- getArgs
     initializeAll
-    window <- createWindow "SDL Test" defaultWindow { windowVisible = False }
+    window <- createWindow "SDL Test" defaultWindow { 
+      windowVisible = False, windowResizable = True
+    }
     renderer <- createRenderer window (-1) defaultRenderer
     tileset <- loadImg renderer (head args)
     tilesetInfo <- queryTexture tileset
@@ -57,10 +59,17 @@ mainLoop =
                       keyboardEventKeyMotion ke == Pressed &&
                       keysymKeycode (keyboardEventKeysym ke) == KeycodeQ
                   _ -> False
+      isWindowResizeEvent event =
+                case eventPayload event of
+                  WindowResizedEvent re -> True
+                  _                     -> False
       mainLoop = 
         do
+          window <- rsWindow <$> Control.Monad.State.get
           renderer <- rsRenderer <$> Control.Monad.State.get 
           events <- pollEvents
+          winSize <- SDL.get (windowSize window)
+          rendererLogicalSize renderer $= Just winSize
           clear renderer
           drawScreen debugScreen
           present renderer
