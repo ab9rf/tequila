@@ -6,29 +6,27 @@ module Lib
   , black
   , magenta
   , noAlpha
-  )
-where
+  ) where
 
-import           SDL.Vect                       ( V2
-                                                , V3(V3)
-                                                , V4(V4)
-                                                )
-import           Data.Word                      ( Word8 )
+import Data.Word (Word8)
+import SDL.Vect (V2, V3(V3), V4(V4))
 
 type Color = V4 Word8
 
 type Screen = V2 Int -> Cell
 
-data Cell = Cell {
-      ch :: Word8 -- not character!
-    , fg :: Color
-    , bg :: Color
-}
+data Cell = Cell
+  { ch :: Word8 -- not character!
+  , fg :: Color
+  , bg :: Color
+  }
 
 white :: Color
 white = V4 255 255 255 255
+
 black :: Color
 black = V4 0 0 0 255
+
 magenta :: Color
 magenta = V4 255 0 255 255
 
